@@ -42,4 +42,6 @@ Used to transfer a data on the SPI lines and for set the state of the SPI line.
 ## Documents
 The documents folder contains the PDF of the datasheet and the PDF of the assembly instructions.
 
-Examples provided by the CUI Device were used to create the libraries.
+
+
+The libraries and examples takes inspiration and is based on the code shared by CUI Devices which authorizes its diffusion and modification.
