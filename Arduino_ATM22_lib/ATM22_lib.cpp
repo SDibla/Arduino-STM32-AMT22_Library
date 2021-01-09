@@ -6,13 +6,8 @@
 #include "ATM22_lib.h"
 
 
-ATM22::ATM22(uint8_t mosi, uint8_t miso, uint8_t sclk, uint8_t cs, uint8_t clk_divider, uint8_t resolution) {
-    pinMode(sclk, OUTPUT);
-    pinMode(mosi, OUTPUT);
-    pinMode(miso, INPUT);
-    SPI.setClockDivider(clk_divider);
+ATM22::ATM22(uint8_t cs, uint8_t resolution) {
     digitalWrite(cs, HIGH);   //Get the CS line high which is the default inactive state
-    SPI.begin();
     _cs = cs;
     _resolution = resolution;
 }
@@ -114,4 +109,16 @@ void ATM22::resetAMT22(){
  */
 void ATM22::setResolution(uint8_t resolution) {
     _resolution = resolution;
+}
+
+/*
+ * This function is not related to the ATM22 class. It allows to set up communication via SPI.
+ * It must be performed in the setup section of the Arduino main.
+ */
+void setUpSPI(uint8_t mosi, uint8_t miso, uint8_t sclk, uint8_t clk_divider){
+    pinMode(sclk, OUTPUT);
+    pinMode(mosi, OUTPUT);
+    pinMode(miso, INPUT);
+    SPI.setClockDivider(clk_divider);
+    SPI.begin();
 }

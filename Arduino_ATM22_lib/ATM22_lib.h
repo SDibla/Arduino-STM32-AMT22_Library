@@ -19,7 +19,7 @@
 class ATM22
 {
 public:
-    ATM22(uint8_t mosi, uint8_t miso, uint8_t sclk, uint8_t cs, uint8_t clk_divider, uint8_t resolution);
+    ATM22(uint8_t cs, uint8_t resolution);
     uint16_t getPositionSPI();
     void setZeroSPI();
     void resetAMT22();
@@ -32,5 +32,7 @@ private:
     void setCSLine (uint8_t csLine);
 
 };
+
+void setUpSPI(uint8_t mosi, uint8_t miso, uint8_t sclk, uint8_t clk_divider);
 
 #endif //ATM22_LIB_LIBRARY_H
