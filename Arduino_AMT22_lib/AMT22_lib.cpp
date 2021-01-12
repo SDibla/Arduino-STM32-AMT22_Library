@@ -1,12 +1,12 @@
 /*
-  ATM22.cpp - Arduino library for ATM22 series absolute encoders by CUI Devices.
+  AMT22.cpp - Arduino library for ATM22 series absolute encoders by CUI Devices.
   Created by Simone Di Blasi, December 2020.
 */
 
-#include "ATM22_lib.h"
+#include "AMT22_lib.h"
 
 
-ATM22::ATM22(uint8_t cs, uint8_t resolution) {
+AMT22::AMT22(uint8_t cs, uint8_t resolution) {
     digitalWrite(cs, HIGH);   //Get the CS line high which is the default inactive state
     _cs = cs;
     _resolution = resolution;
@@ -19,7 +19,7 @@ ATM22::ATM22(uint8_t cs, uint8_t resolution) {
  * is actually sending 14-bits, when it is actually sending 12-bit values, where every number is multiplied by 4.
  * Error values are returned as 0xFFFF
  */
-uint16_t ATM22::getPositionSPI(){
+uint16_t AMT22::getPositionSPI(){
     uint16_t currentPosition;       //16-bit response from encoder
     bool binaryArray[16];           //after receiving the position we will populate this array and use it for calculating the checksum
 
@@ -52,7 +52,7 @@ uint16_t ATM22::getPositionSPI(){
  * Use releaseLine to let the spiWriteRead function know if it should release the chip select line after transfer.
  * The received data is returned.
  */
-uint8_t ATM22::spiWriteRead(uint8_t sendByte, uint8_t releaseLine){
+uint8_t AMT22::spiWriteRead(uint8_t sendByte, uint8_t releaseLine){
     //holder for the received over SPI
     uint8_t data;
 
@@ -73,14 +73,14 @@ uint8_t ATM22::spiWriteRead(uint8_t sendByte, uint8_t releaseLine){
 /*
  * This function sets the state of the SPI line.
  */
-void ATM22::setCSLine(uint8_t csLine){
+void AMT22::setCSLine(uint8_t csLine){
     digitalWrite(_cs, csLine);
 }
 
 /*
  * The AMT22 bus allows for extended commands. The first byte is 0x00 like a normal position transfer, but the second byte is the command.
  */
-void ATM22::setZeroSPI(){
+void AMT22::setZeroSPI(){
     spiWriteRead(AMT22_NOP, false);
 
     //this is the time required between bytes as specified in the datasheet.
@@ -93,7 +93,7 @@ void ATM22::setZeroSPI(){
 /*
  * The AMT22 bus allows for extended commands. The first byte is 0x00 like a normal position transfer, but the second byte is the command.
  */
-void ATM22::resetAMT22(){
+void AMT22::resetAMT22(){
     spiWriteRead(AMT22_NOP, false);
 
     //this is the time required between bytes as specified in the datasheet.
@@ -107,12 +107,12 @@ void ATM22::resetAMT22(){
 /*
  * This function sets the resolution of the encoder.
  */
-void ATM22::setResolution(uint8_t resolution) {
+void AMT22::setResolution(uint8_t resolution) {
     _resolution = resolution;
 }
 
 /*
- * This function is not related to the ATM22 class. It allows to set up communication via SPI.
+ * This function is not related to the AMT22 class. It allows to set up communication via SPI.
  * It must be performed in the setup section of the Arduino main.
  */
 void setUpSPI(uint8_t mosi, uint8_t miso, uint8_t sclk, uint8_t clk_divider){

@@ -1,10 +1,10 @@
 /*
-  ATM22.h - Arduino library for ATM22 series absolute encoders by CUI Devices.
+  AMT22.h - Arduino library for ATM22 series absolute encoders by CUI Devices.
   Created by Simone Di Blasi, December 2020.
 */
 
-#ifndef ATM22_LIB_LIBRARY_H
-#define ATM22_LIB_LIBRARY_H
+#ifndef AMT22_LIB_LIBRARY_H
+#define AMT22_LIB_LIBRARY_H
 
 #include "Arduino.h"
 #include <SPI.h>
@@ -16,10 +16,10 @@
 
 #define RES12           12
 
-class ATM22
+class AMT22
 {
 public:
-    ATM22(uint8_t cs, uint8_t resolution);
+    AMT22(uint8_t cs, uint8_t resolution);
     uint16_t getPositionSPI();
     void setZeroSPI();
     void resetAMT22();
@@ -35,4 +35,4 @@ private:
 
 void setUpSPI(uint8_t mosi, uint8_t miso, uint8_t sclk, uint8_t clk_divider);
 
-#endif //ATM22_LIB_LIBRARY_H
+#endif //AMT22_LIB_LIBRARY_H
