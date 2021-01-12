@@ -1,5 +1,5 @@
-# ATM22 Library
-Arduino and STM32 libraries for absolute encoder of the ATM22 series (12 bit or 14 bit version) by CUI Devices.
+# AMt22 Library
+Arduino and STM32 libraries for absolute encoder of the AMT22 series (12 bit or 14 bit version) by CUI Devices.
 
 ## Device
 CUI Devices AMT22 series is a rugged, high accuracy absolute encoder outputting 12 bits or 14 bits of absolute position information with Serial Peripheral Interface (SPI) communication. Combined with an operating temperature range of -40°C to +125°C, high accuracy, a compact package, and low current draw, the AMT22 provides a compelling solution for a range of industrial, automation, robotics, and renewable energy applications.
