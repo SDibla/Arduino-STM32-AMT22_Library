@@ -1,6 +1,5 @@
 /*
   AMT22.c - STM32 library for ATM22 series absolute encoders by CUI Devices.
-  AMT22.c - STM32 library for ATM22 series absolute encoders by CUI Devices.
   Created by Simone Di Blasi, December 2020.
 */
 
