@@ -38,6 +38,21 @@ These functions take advantage of two other private functions to work:
 Used to transfer a data on the SPI lines and for set the state of the SPI line.
 
 ## STM32 Library
+The functions present are:
+* getPositionSPI(SPI_HandleTypeDef *hspi, GPIO_TypeDef* encoderPort, uint16_t encoderPin, uint8_t resolution, TIM_HandleTypeDef *timer)
+* setZeroSPI(SPI_HandleTypeDef *hspi, GPIO_TypeDef* encoderPort, uint16_t encoderPin, TIM_HandleTypeDef *timer)
+* resetAMT22(SPI_HandleTypeDef *hspi, GPIO_TypeDef* encoderPort, uint16_t encoderPin, TIM_HandleTypeDef *timer)
+
+The first function gets the absolute position from the AMT22 encoder using the SPI bus. The AMT22 position includes 2 checkbits to use for position verification. Both 12-bit and 14-bit possible encoders transfer position via two bytes, giving 16-bits regardless of resolution.
+For 12-bit encoders the position is left-shifted two bits, leaving the right two bits as zeros. This gives the impression that the encoder is actually sending 14-bits, when it is actually sending 12-bit values, where every number is multiplied by 4.
+In case of error the return value is 0xFFFF.
+The following two functions bring the encoder to a default position.
+These functions take advantage of other three functions to work:
+* setCSLine(GPIO_TypeDef* encoderPort, uint16_t encoderPin, GPIO_PinState csLine)
+* spiWriteRead(SPI_HandleTypeDef *hspi, uint8_t sendByte, GPIO_TypeDef* encoderPort, uint16_t encoderPin, uint8_t releaseLine, TIM_HandleTypeDef *timer)
+* delay(TIM_HandleTypeDef *timer, uint32_t delayTime)
+
+Used to transfer a data on the SPI lines and for set the state of the SPI line. The delay function is a custom function that exploit the use of internal timer instead using the normal delay function.
 
 ## Documents
 The documents folder contains the PDF of the datasheet and the PDF of the assembly instructions.
