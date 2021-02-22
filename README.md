@@ -1,4 +1,4 @@
-# AMt22 Library
+# AMT22 Library
 Arduino and STM32 libraries for absolute encoder of the AMT22 series (12 bit or 14 bit version) by CUI Devices.
 
 ## Device
