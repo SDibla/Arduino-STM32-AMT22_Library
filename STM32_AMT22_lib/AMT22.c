@@ -14,7 +14,6 @@
 #define RES14           14
 
 
-
 void setCSLine (GPIO_TypeDef* encoderPort, uint16_t encoderPin, GPIO_PinState csLine)
 {
 	HAL_GPIO_WritePin(encoderPort, encoderPin, csLine);
@@ -69,13 +68,10 @@ uint16_t getPositionSPI(SPI_HandleTypeDef *hspi, GPIO_TypeDef* encoderPort, uint
     currentPosition = 0xFFFF; //bad position
   }
 
-
   //If the resolution is 12-bits, and wasn't 0xFFFF, then shift position, otherwise do nothing
   if ((resolution == RES12) && (currentPosition != 0xFFFF)) currentPosition = currentPosition >> 2;
   return currentPosition;
 }
-
-
 
 void setZeroSPI(SPI_HandleTypeDef *hspi, GPIO_TypeDef* encoderPort, uint16_t encoderPin, TIM_HandleTypeDef *timer)
 {
