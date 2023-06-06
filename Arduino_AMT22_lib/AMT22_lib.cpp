@@ -64,7 +64,7 @@ uint8_t AMT22::spiWriteRead(uint8_t sendByte, uint8_t releaseLine){
     delayMicroseconds(3);
 
     if(!releaseLine){
-        SPI.beingTransaction(_settings);
+        SPI.beginTransaction(_settings);
     }
 
     //send the command
