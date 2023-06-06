@@ -26,6 +26,7 @@ The public functions present are:
 * setZeroSPI()
 * resetAMT22()
 * setResolution(uint8 t resolution)
+* setSettings(SPISettings settings)
 
 The first function gets the absolute position from the AMT22 encoder using the SPI bus. The AMT22 position includes 2 checkbits to use for position verification. Both 12-bit and 14-bit possible encoders transfer position via two bytes, giving 16-bits regardless of resolution.
 For 12-bit encoders the position is left-shifted two bits, leaving the right two bits as zeros. This gives the impression that the encoder is actually sending 14-bits, when it is actually sending 12-bit values, where every number is multiplied by 4.

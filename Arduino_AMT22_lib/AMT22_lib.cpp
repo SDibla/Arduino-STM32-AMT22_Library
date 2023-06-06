@@ -6,10 +6,11 @@
 #include "AMT22_lib.h"
 
 
-AMT22::AMT22(uint8_t cs, uint8_t resolution) {
+AMT22::AMT22(uint8_t cs, uint8_t resolution, SPISettings settings) {
     digitalWrite(cs, HIGH);   //Get the CS line high which is the default inactive state
     _cs = cs;
     _resolution = resolution;
+    _settings = settings;
 }
 
 /*
@@ -62,9 +63,18 @@ uint8_t AMT22::spiWriteRead(uint8_t sendByte, uint8_t releaseLine){
     //There is a minimum time requirement after CS goes low before data can be clocked out of the encoder.
     delayMicroseconds(3);
 
+    if(!releaseLine){
+        SPI.beginTransaction(_settings);
+    }
+
     //send the command
     data = SPI.transfer(sendByte);
     delayMicroseconds(3); //There is also a minimum time after clocking that CS should remain asserted before we release it
+    
+    if(releaseLine){
+        SPI.endTransaction();
+    }
+    
     setCSLine(releaseLine); //if releaseLine is high set it high else it stays low
 
     return data;
@@ -109,6 +119,10 @@ void AMT22::resetAMT22(){
  */
 void AMT22::setResolution(uint8_t resolution) {
     _resolution = resolution;
+}
+
+void AMT22::setSettings(SPISettings settings) {
+    _settings = settings;
 }
 
 /*

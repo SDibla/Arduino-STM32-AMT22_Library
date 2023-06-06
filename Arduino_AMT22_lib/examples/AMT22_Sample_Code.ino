@@ -50,6 +50,8 @@
 
 /*Object creation*/
 AMT22* Encoder;
+SPISettings settings = SPISettings(2000000, MSBFIRST, SPI_MODE0);
+
 
 void setup(){
   //Initialize the UART serial connection for debugging
@@ -57,7 +59,7 @@ void setup(){
   //Initialize the SPI communication
   setUpSPI(SPI_MOSI, SPI_MISO, SPI_SCLK, SPI_CLOCK_DIV32); //This operation only needs to be done once, not once for each Encoder object.
   //Initialize the encoder object with necessary parameters 
-  Encoder = new AMT22(ENC,RES14);
+  Encoder = new AMT22(ENC,RES14, settings);
 }
 
 void loop() 
