@@ -19,15 +19,17 @@
 class AMT22
 {
 public:
-    AMT22(uint8_t cs, uint8_t resolution);
+    AMT22(uint8_t cs, uint8_t resolution, SPISettings settings);
     uint16_t getPositionSPI();
     void setZeroSPI();
     void resetAMT22();
     void setResolution(uint8_t resolution);
+    void setSettings(SPISettings settings);
 
 
 private:
     uint8_t _cs, _resolution;
+    SPISettings _settings;
     uint8_t spiWriteRead(uint8_t sendByte, uint8_t releaseLine);
     void setCSLine (uint8_t csLine);
 
